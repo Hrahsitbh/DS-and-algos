@@ -151,3 +151,6 @@
 // let arr1 = [1, 12, 15, 26, 38];
 // let arr2 = [2, 13, 17, 30, 45];
 // if (arr1.length === arr2.length) console.log(getMedian(arr1, arr2, 0, arr1.length - 1, 0, arr2.length - 1));
+
+
+// https://riyajain.hashnode.dev/most-frequent-javascript-questions-and-answers
