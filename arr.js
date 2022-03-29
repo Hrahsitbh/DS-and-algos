@@ -18,7 +18,6 @@
 
 // console.log(isPairSum(arr, len, val));
 
-
 // Given two sorted arrays and a number x, find the pair whose sum is closest to x and the pair has an element from each array.
 
 // let ar1 = [1, 4, 5, 7];
@@ -26,7 +25,6 @@
 // let len1 = ar1.length;
 // let len2 = ar2.length;
 // let val = 38;
-
 
 // function printClosest(ar1, ar2, len1, len2, val) {
 //     let i = ar1[0];
@@ -46,7 +44,6 @@
 // }
 // console.log(printClosest(ar1, ar2, len1, len2, val));
 
-
 // Find all triplets with zero sum
 
 // function findTriplets(arr, len) {
@@ -65,7 +62,6 @@
 //     }
 //     if (!found) return 'not found';
 // }
-
 
 // let arr = [0, -1, 2, -3, 1];
 // let len = arr.length;
@@ -94,7 +90,6 @@
 // findSumOfTwoTriplet(arr, len);
 // let arr1 = [5, 32, 1, 7, 10, 50, 19, 21, 0];
 // console.log(findSumOfTwoTriplet(arr1, arr1.length));
-
 
 // Median of two sorted arrays of same size (with O(n))
 
@@ -152,5 +147,104 @@
 // let arr2 = [2, 13, 17, 30, 45];
 // if (arr1.length === arr2.length) console.log(getMedian(arr1, arr2, 0, arr1.length - 1, 0, arr2.length - 1));
 
-
 // https://riyajain.hashnode.dev/most-frequent-javascript-questions-and-answers
+
+// sliding window
+function maxSumOfK(arr, k) {
+  let max = 0;
+  let currentSum = 0;
+
+  // calculaating sum of first k elements
+  for (let i = 0; i < k; i++) {
+    currentSum += arr[i];
+  }
+
+  max = currentSum;
+
+  for (let i = k, len = arr.length; i < len; i++) {
+    currentSum += arr[i] - arr[i - k];
+    max = Math.max(max, currentSum);
+  }
+
+  return max;
+}
+
+const arr = [1, 4, 2, 10, 23, 3, 1, 0, 20];
+maxSumOfK(arr, 4);
+
+// Javascript program to
+// reverse a String
+
+// Reverse the letters
+// of the word
+function reverse(str, start, end) {
+  // Temporary variable
+  // to store character
+  let temp;
+
+  while (start <= end) {
+    // Swapping the first
+    // and last character
+    temp = str[start];
+    str[start] = str[end];
+    str[end] = temp;
+    start++;
+    end--;
+  }
+}
+// Function to reverse words
+function reverseWords(s) {
+  // Reversing individual words as
+  // explained in the first step
+  s = s.split("");
+  let start = 0;
+  for (let end = 0; end < s.length; end++) {
+    // If we see a space, we
+    // reverse the previous
+    // word (word between
+    // the indexes start and end-1
+    // i.e., s[start..end-1]
+    if (s[end] == " ") {
+      reverse(s, start, end);
+      start = end + 1;
+    }
+  }
+  // Reverse the last word
+  reverse(s, start, s.length - 1);
+
+  // Reverse the entire String
+  reverse(s, 0, s.length - 1);
+  return s.join("");
+}
+// Driver Code
+var s = "i like this program very much ";
+
+reverseWords(s);
+
+// chop a string in array diff sizes
+
+function chopArray(str, size) {
+  const arr = [];
+  let i = 0;
+  while (i < str.length) {
+    arr.push(str.slice(i, i + size));
+    i += size;
+  }
+  return arr;
+}
+
+// print all the sub arrays of an array using recursion
+function printSubArrays(arr, start, end) {
+  if (end === arr.length) return;
+  else if (start > end) printSubArrays(arr, 0, end + 1);
+  else {
+    for (let i = start; i < end; i++) {
+      console.log(arr[i]);
+    }
+    console.log(arr[end]);
+
+    printSubArrays(arr, start + 1, end);
+  }
+}
+
+printSubArrays([1, 2, 3, 4], 0, 0);
