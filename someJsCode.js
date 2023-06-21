@@ -35,7 +35,7 @@ function fact(n) {
 }
 
 const factMemo = memo(fact);
-fact(100);
+factMemo(100);
 
 // currying
 function curry(fn) {
@@ -235,7 +235,7 @@ Array.prototype.myReduce = function (cb, initialVal = undefined) {
   let accumlator = initialVal || this[0];
   let i = initialVal ? 0 : 1;
   for (i; i < this.length; i++) {
-    accumlator = cb(accumlator, this[i], i, this);
+    accumlator += cb(accumlator, this[i], i, this);
   }
   return accumlator;
 };
@@ -282,7 +282,7 @@ function myBind(context, ...args) {
 // }, 10000);
 
 let counter = 0;
-function mySetTimeOut(fn, delay) {
+function mySetTimeInterval(fn, delay) {
   let timer;
   timer = setTimeout(function executedFn() {
     if (counter === 10) return;
@@ -293,8 +293,21 @@ function mySetTimeOut(fn, delay) {
   return timer;
 }
 
-let id = mySetTimeOut(() => console.log("as"), 500);
-setTimeout(() => console.log(id), 6000);
+let id = mySetTimeInterval(() => console.log("as"), 500);
+mySetTimeInterval(() => console.log(id), 6000);
+
+function mySetTimeout(cb, delay){
+  const start = Date.now();
+  function check(){
+    if(Date.now() > start + delay) cb();
+    else requestIdleCallback(check);
+  }
+  requestIdleCallback(check)
+}
+
+mySetTimeout(()=>{
+  console.log("hi")
+},1000)
 
 // groupby loadash
 const groupBy = (collection, criteria) => {

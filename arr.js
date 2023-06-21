@@ -326,13 +326,11 @@ findPlatform(arrival, dep);
 
 // prefixArr ques
 const MAX = 100001;
-function minHalls(lectures, n)
-{
- 
+function minHalls(lectures, n) {
   const prefixArr = new Array(24).fill(0);
-  for(let i = 0; i<n; i++){
-   prefixArr[lectures[i][0]]++;
-   prefixArr[lectures[i][1] + 1]--;
+  for (let i = 0; i < n; i++) {
+    prefixArr[lectures[i][0]]++;
+    prefixArr[lectures[i][1] + 1]--;
   }
   let ans = prefixArr[0];
   for (let i = 1; i < prefixArr.length; i++) {
@@ -341,8 +339,11 @@ function minHalls(lectures, n)
   }
   return ans;
 }
- 
+
 // Driver code
-let lectures = [[7,10],[2,4]];
+let lectures = [
+  [7, 10],
+  [2, 4],
+];
 let n = lectures.length;
 minHalls(lectures, n);
